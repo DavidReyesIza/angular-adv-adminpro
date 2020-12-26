@@ -30,9 +30,9 @@ export class SettingsService {
   checkCurrentTheme(){
     
 
-    const links = document.querySelectorAll('.selector');
+      const links = document.querySelectorAll('.selector');
 
-    links.forEach(elem =>{
+      links.forEach(elem =>{
 
       elem.classList.remove('working');
     

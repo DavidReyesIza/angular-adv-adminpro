@@ -11,13 +11,13 @@
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
-            ><img src="./assets/images/users/profile.png" alt="user" /><span
+            ><img [src]="usuario.imagenUrl" alt="user" /><span
               class="hide-menu"
-              >Steave Jobs
+              >{{usuario.nombre}}
             </span></a
           >
           <ul aria-expanded="false" class="collapse">
-            <li><a href="javascript:void()">My Profile </a></li>
+            <li ><a [routerLink]="['./perfil']" routerLinkActive="active">My Profile </a></li>
             <li><a href="javascript:void()">My Balance</a></li>
             <li><a href="javascript:void()">Inbox</a></li>
             <li>
@@ -45,7 +45,9 @@
           >
           <ul aria-expanded="false" class="collapse">
             <li *ngFor="let subMenuItem of item.submenu">
-              <a [routerLink]="subMenuItem.url">{{subMenuItem.titulo}} </a>
+              <a [routerLink]="subMenuItem.url" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              >{{subMenuItem.titulo}} </a>
             </li>
             
           </ul>
