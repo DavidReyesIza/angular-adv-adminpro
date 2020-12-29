@@ -40,6 +40,7 @@ export class PerfilComponent implements OnInit {
       this.usuario.nombre = nombre;
       this.usuario.email = email;
 
+
       Swal.fire('Guardado', 'Cambios fueron Guardados', 'success');
     }, (err)=>{
       Swal.fire('Error', err.error.msg, 'error');
@@ -64,7 +65,7 @@ export class PerfilComponent implements OnInit {
 
   subirImagen(){
 
-    this.fileUploadService.actualizarFoto(this.imagenSubir, 'usuarios',this.usuario._id)
+    this.fileUploadService.actualizarFoto(this.imagenSubir, 'usuarios',this.usuario.uid)
     .then(img=>{
        this.usuario.img = img
        Swal.fire('Guardado', 'Imagen de usuario acutalizada', 'success');

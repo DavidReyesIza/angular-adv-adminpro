@@ -8,6 +8,7 @@ import { Observable, of, pipe } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
 
+
 // Esto se puede declarar dentro de la clase pero habria que usar el .this y queda a discrecion donde declararlo
 const base_url = environment.base_url;
 declare const gapi: any;
@@ -30,7 +31,18 @@ get token(){
 }
 
 get uid():string{
-  return this.usuario._id || '';
+  return this.usuario.uid || '';
+}
+
+get  headers(){
+
+  return{
+    headers:{
+      'x-token':this.token
+    }
+    
+  }
+  
 }
   googleInit(){
     gapi.load('auth2', ()=>{
@@ -97,10 +109,10 @@ get uid():string{
   actualizarPerfil(data:{email:string, nombre: string, role:string}){
     data = {
       ...data,
-      role: this.usuario.role
+      role: this.usuario.role // Aca estamos extraendo el rol para que el usuario no pueda cambiarse a si mismo el rol
     };
-
-    return this.http.put(`${base_url}/usuarios/${this.uid}`,data,{headers:{'x-token':this.token}})
+    
+    return this.http.put(`${base_url}/usuarios/${this.uid}`,data,this.headers)
 
   }
 
@@ -125,7 +137,33 @@ get uid():string{
                      )
  
    }
- 
 
+cargarUsuarios(desde: number = 0){// Se establece uno predeterminado por si no se envia ninguno
+
+  const url = `${base_url}/usuarios?desde=${desde}`;
+  return this.http.get<{totalRegistros: number, usuarios:Usuario[]}>(url,this.headers) // El <> despues del get es para que typescript sepa que datos retorna del backend y no se queje
+  .pipe(
+    map(resp =>{
+      const usuarios = resp.usuarios.map(
+        user => new Usuario(user.nombre,user.email,'',user.img,user.role,user.google,user.uid)
+      );
+
+      return {
+        totalRegistros: resp.totalRegistros,
+        usuarios
+      }
+    })
+  )
+}
+
+eliminarUsuario(usuario: Usuario){
+ const url = `${base_url}/usuarios/${usuario.uid}`;
+ return this.http.delete(url,this.headers);
+}
+
+
+ActualizarUsuarioEnPanel(usuario: Usuario){
+  return this.http.put(`${base_url}/usuarios/${usuario.uid}`,usuario,this.headers);
+}
 
 }
