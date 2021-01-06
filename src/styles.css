@@ -32,6 +32,15 @@
 .w140{
     width: 140px;
 }
+.w100{
+    width: 100px;
+}
+
+.w75{
+    width: 75px;
+}
+
+
 
 .fondo-modal-imagen{
     background-color: rgba(0, 0, 0, 0.4);

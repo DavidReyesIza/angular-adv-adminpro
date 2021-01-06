@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
+import { SidebarService } from '../services/sidebar.service';
 
 declare function CustomInitFunctions();
 @Component({
@@ -11,10 +12,12 @@ declare function CustomInitFunctions();
 export class PagesComponent implements OnInit {
 
 
-  constructor(private settingService: SettingsService) { }
+  constructor(private settingService: SettingsService,
+    private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
-    CustomInitFunctions();
+    CustomInitFunctions(); // inicializa los plugins de jquery
+    this.sidebarService.cargarMenu();
 }
 
 }

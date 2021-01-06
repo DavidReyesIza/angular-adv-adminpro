@@ -13,10 +13,10 @@ export class SidebarComponent implements OnInit {
 
 
   public usuario: Usuario;
-  menuItems: any[];
+ 
   
-  constructor(private sidebarService: SidebarService, usuarioService: UsuarioService) {
-    this.menuItems = sidebarService.menu;
+  constructor(public sidebarService: SidebarService, usuarioService: UsuarioService) { // Volvemos publico el servicio para poder utilizarlo en el html y pasarlo por referencia de donde viene la data
+    //this.menuItems = sidebarService.menu;
     this.usuario = usuarioService.usuario;
    }
 

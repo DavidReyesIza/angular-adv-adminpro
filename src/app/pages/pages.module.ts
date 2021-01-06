@@ -23,6 +23,7 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 
@@ -39,7 +40,8 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
-    MedicoComponent
+    MedicoComponent,
+    BusquedaComponent
   ],
   exports:[
     DashboardComponent,
